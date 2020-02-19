@@ -1,3 +1,3 @@
 /**
-* Scrivere qui il codice dell'esercizio 4 del capitolo 4 di eloquentJS
+* 7) (opzionale solo per i più temerari) Svolgere nel file `deep.js` l'esercizio 5 di eloquenteJs "Deep Comparision"
 **/

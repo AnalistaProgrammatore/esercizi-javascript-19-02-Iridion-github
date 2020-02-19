@@ -1,7 +1,7 @@
 # EserciziJavascript 1902
 
 ## MODALITA DI SVOLGIMENTO
-Gli esercizi 1, 2 sono da svolgere carta e penna, la consegna deve essere effettuata tramite foto o scannerizzazione del o dei fogli prodotti per gli esercizi.
+Gli esercizi 1, 2 sono da svolgere carta e penna, la consegna deve essere effettuata tramite foto o scannerizzazione del o dei fogli prodotti per gli esercizi. A meno che si utilizzi il sistema del commento che distingue gli ambienti tramite indentazione. Syke.
 
 ### ESERCIZI
 
@@ -43,7 +43,7 @@ if(true) {
 
 5. Svolgere nel file `reverse.js` l'esercizio 2 del capitolo 4 di eloquentJs "Reverse an array". Sviluppare l'esercizio nella versione "Imperativa" cioè "Coma fare" e nella versione "Dichiarativa" cioè "Cosa fare" (tips: utilizzare la destrutturazione e lo spread operator per la versione "Dichiarativa". **NB le funzioni implementate devono essere pure**
 
-5. Svolgere nel file `list.js` l'esercizio 3 del capitolo 4 di eloquentJS "A list"
+6. Svolgere nel file `list.js` l'esercizio 3 del capitolo 4 di eloquentJS "A list"
 
-6. (opzionale solo per i più temerari) Svolgere nel file `deep.js` l'esercizio 5 di eloquenteJs "Deep Comparision"  
+7. (opzionale solo per i più temerari) Svolgere nel file `deep.js` l'esercizio 5 di eloquenteJs "Deep Comparision"  
 
