@@ -83,3 +83,25 @@ AMBIENTE GLOBALE: {
   console.log stampa [0, 1, 1, 2, 3, 5, 8, 13, 21]
 }
 */
+
+/*
+Versione senza operatore ternario:
+quando trova nell'array un numero superiore a limit,
+lo elimina e ferma il programma,
+ritornando l'array ridotto.
+*/
+/*
+let acc = 0
+let array = [0, 1]
+const fibo = limit => {
+  if (array[array.length - 1] > limit) {
+    array.pop()
+    return array
+  } else {
+    acc = array[array.length - 2] + array[array.length - 1]
+    array.push(acc)
+    return fibo(limit)
+  }
+}
+console.log(fibo(30))
+*/
