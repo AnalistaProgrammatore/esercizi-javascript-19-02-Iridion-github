@@ -7,64 +7,79 @@
  * a vostra scelta **purchè nello stack compaiano almeno 4 chiamate ricorsive**)
 **/
 
-const start = 30
-let array = []
-const cycles = 4
-const fibonacci = (n) => {
-  if (array.length > cycles) {
+let acc = 1
+let array = [0, 1]
+const fibonacci = limit => {
+  if (array[array.length - 1] >= limit) {
     return array
   } else {
-    array.push(n)
-    return fibonacci(n + (n - 1))
+    array.push(acc)
+    acc = array[array.length - 2] + array[array.length - 1]
+    return acc > limit ? array : fibonacci(limit)
   }
 }
-console.log(fibonacci(start))
+console.log(fibonacci(30))
 
 /*
 AMBIENTE GLOBALE: {
-  start = 30
-  array = array
-  cycles = 4
+  acc = 1
+  array = [0, 1]
+  fibonacci = function
+  console.log chiama fibonacci con param 30
+-------------------------------------------
   AMBIENTE FIBONACCI (1° Chiamata): {
-    n = 30
-    array = [30]
+    limit = 30
+
     AMBIENTE ELSE: {
+      array = [0, 1, acc] ---> [0, 1, 1]
+      acc = 1 + 1 ---> 2
+      return chiama ancora la funzione fibonacci
+      -------------------------------------------
       AMBIENTE FIBONACCI (2° Chiamata): {
-        n = 59
-        array = [ 30, 59 ]
+        limit = 30
         AMBIENTE ELSE: {
-            AMBIENTE FIBONACCI (3° Chiamata): {
-              n = 117
-              array = [ 30, 59, 117 ]
-              AMBIENTE ELSE: {
-                AMBIENTE FIBONACCI (4° Chiamata): {
-                  n = 233
-                  array = [ 30, 59, 117, 233 ]
-                    AMBIENTE ELSE: {
-                      AMBIENTE FIBONACCI (5° Chiamata): {
-                        n = 465
-                        array = [ 30, 59, 117, 233, 465 ]
-                          AMBIENTE ELSE: {
-                            AMBIENTE FIBONACCI (6° Chiamata): {
-                              n = 929
-                                AMBIENTE IF: {
-                                return [ 30, 59, 117, 233, 465 ]
-                              }
-                            }
-                          return [ 30, 59, 117, 233, 465 ]
-                        }
-                      }
-                    return [ 30, 59, 117, 233, 465 ]
+          array = [0, 1, 1, acc] ---> [0, 1, 1, 2]
+          acc = 1 + 2 ---> 3
+          return chiama ancora la funzione fibonacci
+          -------------------------------------------
+          AMBIENTE FIBONACCI (3° Chiamata): {
+            limit = 30
+            AMBIENTE ELSE: {
+              array = [0, 1, 1, 2, acc] ---> [0, 1, 1, 2, 3]
+              acc = 3 + 2 ---> 5
+              return chiama ancora la funzione fibonacci
+              -------------------------------------------
+              AMBIENTE FIBONACCI (4° Chiamata): {
+                limit = 30
+                AMBIENTE ELSE: {
+                  array = [0, 1, 1, 2, 3, acc] ---> [0, 1, 1, 2, 3, 5]
+                  acc = 3 + 5 ---> 8
+                  return chiama ancora la funzione fibonacci
+                  -------------------------------------------
+                  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                  >>> QUI CI SAREBBERO LE ALTRE RICORSIONI,  >>>>
+                  >>> SKIPPO SINO ALLA CHIAMATA CHE RISPETTA  >>>
+                  >>> LA CONDIZIONE D'USCITA >>>>>>>>>>>>>>>>>>>>
+                  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                  -------------------------------------------
+                  AMBIENTE FIBONACCI (7° Chiamata): {
+                    limit = 30
+                    AMBIENTE IF: {
+                      return [0, 1, 1, 2, 3, 5, 8, 13, 21]
+                    }
                   }
+                -------------------------------------------
                 }
-                return [ 30, 59, 117, 233, 465 ]
               }
+            -------------------------------------------
             }
-          return [ 30, 59, 117, 233, 465 ]
+          }
+        -------------------------------------------
         }
       }
-      return [ 30, 59, 117, 233, 465 ]
+    -------------------------------------------
     }
   }
+  console.log stampa [0, 1, 1, 2, 3, 5, 8, 13, 21]
 }
 */
