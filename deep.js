@@ -13,29 +13,28 @@ The Object.keys function will be useful when you need to go over the properties 
 
 //Daje, famose der male.
 
-//Vicino alla soluzione, incompleto.
-
-const deepEqual = (elem1, elem2) => {
-  console.log("elem1 is", elem1, "and its type is ", typeof elem1)
-  console.log("elem2 is", elem2, "and its type is ", typeof elem2)
+const deepEqual = (elem1, elem2, depth = 0, results = [], difference = "") => {
   if (typeof elem1 === "object" && typeof elem2 === "object") {
     if (Object.keys(elem1).length === Object.keys(elem2).length) {
-      let results = []
+      depth++
       for (let x = 0; x < Object.keys(elem1).length; x++) {
-        elem1Overwrite = Object.values(elem1)[x]
-        console.log("Inside the for elem1 is " + elem1Overwrite)
-        elem2Overwrite = Object.values(elem2)[x]
-        console.log("Inside the for elem2 is " + elem2Overwrite)
-        results = [...results, elem1Overwrite === elem2Overwrite]
+        elem1Key = JSON.stringify(Object.keys(elem1)[x])
+        elem1Value = JSON.stringify(Object.values(elem1)[x])
+        elem2Key = JSON.stringify(Object.keys(elem2)[x])
+        elem2Value = JSON.stringify(Object.values(elem2)[x])
+        results.push(elem1Key === elem2Key && elem1Value === elem2Value)
+        if (results[results.length - 1] === false) {
+          difference = "The first element differs from the second, at depth level [" + depth + "]: " + elem1Key + ": " + elem1Value + " | VS | " + elem2Key + ": " + elem2Value + "."
+        }
+        elem1Before = JSON.parse(elem1Value)
+        elem2Before = JSON.parse(elem2Value)
       }
-      console.log(results)
-      //return (results.length === Object.keys(elem1).length && results.includes(false)) ? false : deepEqual(elem1Overwrite, elem2Overwrite) questo dà sempre false
-      return deepEqual(elem1Overwrite, elem2Overwrite) //questo dà sempre true
+      return deepEqual(elem1Before, elem2Before, depth, results, difference)
     } else {
-      return false
+      return "Difference: at depth level [" + depth + "] the first element has " + Object.keys(elem1).length + " property/ies, the second element has " + Object.keys(elem2).length + "."
     }
   } else {
-    return elem1 === elem2 ? true : false
+    return results.includes(false) ? difference : "The two elements are identical. Warning: the test is unable to detect differences in methods yet."
   }
 }
 
@@ -46,7 +45,10 @@ const obj1 = {
         name: "mario",
         surname: "rossi",
         age: 55,
-        married: true
+        married: true,
+        extra: {
+          min: true
+        }
       }
     }
   }
@@ -58,8 +60,12 @@ const obj2 = {
       value1: {
         name: "mario",
         surname: "rossi",
-        age: 65,
-        married: true
+        age: 55,
+        married: true,
+        extra: {
+          min: true,
+          different: true
+        }
       }
     }
   }
